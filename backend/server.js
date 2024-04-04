@@ -23,7 +23,7 @@ app.use(
 
 app.get('/', (req, res) => {
 
-    const indexPath = path.join(__dirname, '..', 'frontend', 'src', 'index.html');
+    const indexPath = path.join(__dirname, '..', 'frontend', 'public', 'index.html');
     res.sendFile(indexPath);
 });
 
