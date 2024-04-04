@@ -1,0 +1,17 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": ">Build a chat application that will have a general room where every user will send\r and receive messages.",
+  "main": "./backend/server.js",
+  "scripts": {
+    "start": "nodemon ./backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kavin",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}
