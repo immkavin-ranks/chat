@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="auto">
   <head>
     <script src="/color-modes.js"></script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChatApp</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+
+    <title>Rooms | Register</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
 
     <style>
-      #user-message {
-        padding: 20px;
-        position: fixed;
-        bottom: 0;
-        width: 80%;
-        padding-right: 50px;
+      .link {
+        text-decoration: none;
       }
-
+      .link:hover {
+        text-decoration: underline;
+      }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -95,9 +96,10 @@
       }
     </style>
 
-    <link rel="stylesheet" href="/styles.css" />
+    <!-- Custom styles for this template -->
+    <link href="/login.css" rel="stylesheet" />
   </head>
-  <body>
+  <body class="d-flex align-items-center py-4 bg-body-tertiary">
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path
@@ -212,126 +214,78 @@
           class="navbar-collapse offcanvas-collapse"
           id="navbarsExampleDefault"
         >
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Profile</a>
-            </li>
-          </ul>
-          <form class="d-flex" action="/login">
-            <button class="btn me-2 btn-outline-success" type="submit">
-              Log in
-            </button>
-          </form>
-          <form action="/register" class="d-flex">
-            <button class="btn btn-outline-success" type="submit">
-              Register
-            </button>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+
+          <form action="/login" class="d-flex">
+            <button class="btn btn-outline-success" type="submit">Login</button>
           </form>
         </div>
       </div>
     </nav>
 
-    <div class="nav-scroller bg-body shadow-sm">
-      <nav class="nav" aria-label="Secondary navigation">
-        <a class="nav-link active" aria-current="page" href="#"
-          >#general-room</a
-        >
-        <a
-          class="nav-link"
-          href="https://github.com/immkavin-ranks/chat-app"
-          target="_blank"
-          >Explore this project on github</a
-        >
-        <a
-          class="nav-link"
-          href="https://github.com/immkavin-ranks/chat-app/issues/new/choose"
-          target="_blank"
-          >Suggestions or issues</a
-        >
-        <a
-          class="nav-link"
-          href="https://github.com/immkavin-ranks"
-          target="_blank"
-          >Visit my github profile</a
-        >
-        <a class="nav-link" href="https://kavinsde.netlify.app/" target="_blank"
-          >Visit my webpage</a
-        >
-      </nav>
-    </div>
+    <main class="form-signin w-100 m-auto">
+      <form>
+        <h1 class="h3 mb-3 fw-normal">New user</h1>
 
-    <main class="container">
-      <div
-        class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm"
-      >
-        <div class="lh-1">
-          <h1 class="h6 mb-0 text-white lh-1">General Room</h1>
-          <small>Chat together!</small>
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Username</label>
         </div>
-      </div>
 
-      <div id="messages" class="my-3 p-3 bg-body rounded shadow-sm"></div>
-
-      <div class="container-fluid" hidden="true">
-        <div class="row">
-          <div class="col-lg-6">
-            <form action="" id="user-message">
-              <div class="input-group">
-                <input
-                  id="m"
-                  type="text"
-                  autocomplete="off"
-                  class="form-control"
-                  placeholder="Message..."
-                  aria-label="Message..."
-                />
-                <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="submit">Send</button>
-                </span>
-              </div>
-            </form>
-          </div>
+        <div class="form-floating">
+          <input
+            type="number"
+            class="form-control"
+            id="floatingNumber"
+            placeholder="+91 XXXXX XXXXX"
+          />
+          <label for="floatingNumber">Phone number</label>
         </div>
-      </div>
+
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingCPassword"
+            placeholder="Confirm password"
+          />
+          <label for="floatingCPassword">Confirm password</label>
+        </div>
+
+        <div class="form-check text-start my-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="remember-me"
+            id="flexCheckDefault"
+          />
+          <label class="form-check-label" for="flexCheckDefault">
+            I accept the <a class="link" href="#">terms and conditions</a>
+          </label>
+        </div>
+        <button class="btn btn-primary w-100 py-2" type="submit">
+          Register
+        </button>
+      </form>
     </main>
 
     <script src="jquery.min.js"></script>
     <script src="umd/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      const room = "general";
-      const socket = io("/");
-
-      $("#user-message").submit(() => {
-        let msg = $("#m").val();
-        socket.emit("message", { msg, room });
-        $("#m").val("");
-        return false;
-      });
-
-      socket.on("connect", () => {
-        // emitting to everybody
-        socket.emit("join", { room: room });
-      });
-
-      socket.on("message", (msg) => {
-        const randomColor =
-          "#" + Math.floor(Math.random() * 16777215).toString(16);
-
-        let compo = $(
-          '<div class="d-flex text-body-secondary pt-3"><svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="' +
-            randomColor +
-            '" /><text x="50%" y="50%" fill="' +
-            randomColor +
-            '" dy=".3em">32x32</text></svg><p class="pb-3 mb-0 small lh-sm border-bottom"><strong class="d-block text-gray-dark">@username</strong>' +
-            msg +
-            "</p></div>"
-        );
-
-        $("#messages").prepend(compo);
-      });
-    </script>
   </body>
 </html>

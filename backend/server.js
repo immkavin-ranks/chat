@@ -34,6 +34,29 @@ app.get('/', (req, res) => {
     res.sendFile(indexPath);
 });
 
+app.get('/login', (req, res) => {
+
+    const indexPath = path.join(__dirname, '..', 'frontend', 'public', 'login.html');
+    res.sendFile(indexPath);
+});
+
+app.get('/register', (req, res) => {
+
+    const indexPath = path.join(__dirname, '..', 'frontend', 'public', 'register.html');
+    res.sendFile(indexPath);
+});
+
+app.get('/chat', (req, res) => {
+
+    const indexPath = path.join(__dirname, '..', 'frontend', 'public', 'chat.html');
+    res.sendFile(indexPath);
+});
+
+app.get('/logout', (req, res) => {
+
+    const indexPath = path.join(__dirname, '..', 'frontend', 'public', 'register.html');
+    res.sendFile(indexPath);
+});
 
 const main = io.of('/');
 

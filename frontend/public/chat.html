@@ -198,7 +198,7 @@
       aria-label="Main navigation"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">Rooms</a>
+        <a class="navbar-brand" href="/chat">Rooms</a>
         <button
           class="navbar-toggler p-0 border-0"
           type="button"
@@ -214,17 +214,15 @@
         >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
+              <a class="nav-link" href="#">Notifications</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#">Profile</a>
             </li>
           </ul>
-          <form class="d-flex" action="/login">
-            <button class="btn me-2 btn-outline-success" type="submit">
-              Log in
-            </button>
-          </form>
-          <form action="/register" class="d-flex">
+          <form action="/logout" class="d-flex">
             <button class="btn btn-outline-success" type="submit">
-              Register
+              Log out
             </button>
           </form>
         </div>
@@ -272,7 +270,7 @@
 
       <div id="messages" class="my-3 p-3 bg-body rounded shadow-sm"></div>
 
-      <div class="container-fluid" hidden="true">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6">
             <form action="" id="user-message">
@@ -286,7 +284,9 @@
                   aria-label="Message..."
                 />
                 <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="submit">Send</button>
+                  <button class="btn btn-secondary bg-purple" type="submit">
+                    Send
+                  </button>
                 </span>
               </div>
             </form>
