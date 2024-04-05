@@ -2,11 +2,11 @@ const express = require('express');
 const app = express()
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const port = 3000;
+const PORT = 3000;
 
 
-server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
 
 
@@ -20,6 +20,13 @@ app.use(
     express.static(path.join(__dirname, "../node_modules/@popperjs/core/dist/"))
 )
 
+app.use(
+    express.static(path.join(__dirname, "../node_modules/jquery/dist/"))
+)
+
+app.use(
+    express.static(path.join(__dirname, "../frontend/src/"))
+)
 
 app.get('/', (req, res) => {
 
@@ -31,16 +38,22 @@ app.get('/', (req, res) => {
 const main = io.of('/');
 
 main.on('connection', (socket) => { 
-    console.log('A user connected');
-    socket.emit('message', {kavin: 'hey how are you?'})
+    
 
-    socket.on('another event', (data) => {
-        console.log('Message:', data);
+    socket.on('join', (data) => {
+        socket.join(data.room);
+        main.in(data.room).emit('message', `New user joined ${data.room} room!`);
+    })
+
+    socket.on('message', (data) => {
+        console.log(`Message: ${data.msg}`);
+        main.in(data.room).emit('message', data.msg);
     });
 
     socket.on('disconnect', () => {
-        console.log('User disconnected');
-    });
+        console.log('user disconnected');
 
+        main.emit('message', 'user disconnected');
+    });
 });
 
