@@ -224,7 +224,7 @@
     </nav>
 
     <main class="form-signin w-100 m-auto">
-      <form>
+      <form id="register">
         <h1 class="h3 mb-3 fw-normal">New user</h1>
 
         <div class="form-floating">
@@ -287,5 +287,18 @@
     <script src="jquery.min.js"></script>
     <script src="umd/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+
+    <script src="socket.io/socket.io.js"></script>
+
+    <script>
+      const socket = io("/register");
+
+      $("#register").submit(() => {
+        let username = $("floatingInput").val();
+        socket.emit("user", { username });
+        $("#floatingInput").val("");
+        return false;
+      });
+    </script>
   </body>
 </html>

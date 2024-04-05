@@ -10,6 +10,34 @@ server.listen(PORT, () => {
 });
 
 
+const { MongoClient, ServerApiVersion } = require('mongodb');
+// mongodb+srv://kavinsde:<password>@cluster0.9coc7my.mongodb.net/
+const uri = "mongodb+srv://kavinsde:kavinsde@cluster0.9coc7my.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
+
 const path = require('path');
 
 app.use(
@@ -44,6 +72,7 @@ app.get('/register', (req, res) => {
 
     const indexPath = path.join(__dirname, '..', 'frontend', 'public', 'register.html');
     res.sendFile(indexPath);
+
 });
 
 app.get('/chat', (req, res) => {
@@ -78,5 +107,13 @@ main.on('connection', (socket) => {
 
         main.emit('message', 'user disconnected');
     });
+
+    socket.on('user', (user) => {
+        console.log(user.username);
+    })
 });
+
+
+
+
 
