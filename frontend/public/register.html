@@ -289,14 +289,28 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script src="socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
     <script>
       const socket = io("/register");
 
       $("#register").submit(() => {
-        let username = $("floatingInput").val();
-        socket.emit("user", { username });
+        let username = $("#floatingInput").val();
+        let phone = $("#floatingNumber").val();
+        let password = $("#floatingPassword").val();
+        let cpassword = $("#floatingCPassword").val();
+        if (password === cpassword) {
+          let hashedPassword = CryptoJS.SHA256(password).toString(
+            CryptoJS.enc.Hex
+          );
+          socket.emit("user", { username, phone, hashedPassword });
+        } else {
+          console.log("wrong pass");
+        }
         $("#floatingInput").val("");
+        $("#floatingNumber").val("");
+        $("#floatingPassword").val("");
+        $("#floatingCPassword").val("");
         return false;
       });
     </script>
